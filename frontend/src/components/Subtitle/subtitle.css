@@ -1,0 +1,7 @@
+.section__subtitle {
+    padding: 5px 16px;
+    background-color: var(--secondary-color);
+    align-items: center;
+    border-radius: 50px;
+    width: max-content;
+}

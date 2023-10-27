@@ -10,12 +10,15 @@ import ServiceList from '../../components/Service/ServiceList';
 import Subtitle from '../../components/Subtitle/Subtitle';
 import FeaturedTourList from '../../components/FeaturedTourList/FeatureTourList';
 import experienceImg from '../../assets/images/experience.png'
+import MasonryGallery from '../../components/MasonryGallery/MasonryGallery';
+import Testimonials from '../../components/Testimonials/Testimonials';
+import Newsletter from '../../components/Newsletter/Newsletter';
 
 const Home = () => {
   return (
     <div>
       {/* Overview */}
-      <section className="mt-5">
+      <section className="mt-5 home_container">
         <Container>
           <Row>
             <Col lg='6'>
@@ -132,7 +135,41 @@ const Home = () => {
         </section>
 
         {/* Gallery */}
-        
+        <section style={{marginTop: 100}}>
+            <Container>
+                <Row>
+                    <Col lg = '12'>
+                        <Subtitle subtitle={"Gallery"} />
+
+                        <h2 className="gallery__title">Visit our customers tour gallery</h2>
+                    </Col>
+
+                    <Col lg = '12'>
+                        <MasonryGallery/>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+
+        {/* Testimonial */}
+        <section style={{marginTop: 100}}>
+            <Container>
+                <Row>
+                    <Col lg = '12'>
+                        <Subtitle subtitle={"Customers Love"} />
+
+                        <h2 className="testimonial__title">What our customers say about us</h2>
+                    </Col>
+
+                    <Col lg = '12'>
+                        <Testimonials/>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+
+        {/* Newsletter */}
+        <Newsletter/>
     </div>
   )
 }
