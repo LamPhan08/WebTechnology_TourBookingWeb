@@ -1,0 +1,70 @@
+.aboutContainer {
+    margin-top: 100px;
+    flex: 2;
+    padding: 30px 50px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.copyrightContainer {
+    color: #003B67;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.developerContainer {
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    padding: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.userIcon img {
+    width: 15%;
+}
+
+.developerName {
+ font-weight: bold;
+ font-size: 20px;
+}
+
+.developerID {
+    font-weight: 600;
+    font-size: 16px;
+    color: #A9A9A9;
+    font-style: italic;
+}
+
+.developerUniversity {
+    font-weight: 600;
+    font-size: 16px;
+    color: rgb(20, 131, 235);
+    font-style: italic;
+}
+
+.line {
+    border: #ddd solid 1px;
+    margin: 20px 200px;
+}
+
+.contactTitle {
+    font-weight: 600;
+    font-size: 16px;
+}   
+
+.emailIcon {
+    margin-right: 10px;
+}
+
+.contactContainer {
+    align-items: center;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
