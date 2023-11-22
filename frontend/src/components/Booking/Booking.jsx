@@ -45,6 +45,17 @@ const Booking = ({ tour, avgRating }) => {
             return alert('Please input full information!')
         }
 
+        // Truyền dữ liệu tổng giá qua cho trang Payment
+        navigate("/tours/payment/" + id, {
+            state: {
+                bookingDate: booking.bookAt,
+                email: booking.userEmail,
+                fullName: booking.fullName,
+                phone: booking.phone,
+                numberofSeats: booking.guestSize,
+                totalPrice: totalAmount
+            }
+        });
     }
 
    

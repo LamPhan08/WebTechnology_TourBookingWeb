@@ -159,6 +159,11 @@
     z-index: 100;
 }
 
+.submitBtn {
+    background-color: var(--secondary-color);
+    margin-right: 10;
+}
+
 @media only screen and (max-width: 768px) {
     .tour__extra-details {
         flex-wrap: wrap;

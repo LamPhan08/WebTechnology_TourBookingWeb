@@ -4,6 +4,7 @@ import Home from '../pages/Home/Home'
 import Tours from '../pages//Tours/Tours'
 import About from "../pages/About/About";
 import TourDetails from "../pages/TourDetails/TourDetails";
+import Payment from "../pages/Payment/Payment";
 // import Login from '../pages/Login'
 // import Register from '../pages/Register'
 // import SearchResultList from '../pages/SearchResultList'
@@ -21,7 +22,6 @@ import TourDetails from "../pages/TourDetails/TourDetails";
 // import Profile from "../pages/Profile";
 // import MyBookings from "../pages/MyBookings";
 // import MyBookingDetails from "../pages/MyBookingDetails";
-// import Payment from "../pages/Payment";
 // import SubmitReceipt from "../pages/SubmitReceipt";
 
 const Routers = () => {
@@ -31,6 +31,7 @@ const Routers = () => {
             <Route path='/home' element={<Home/>} />
             <Route path='/tours' element={<Tours/>} />
             <Route path='/tours/:id' element={<TourDetails/>} />
+            <Route path='/tours/payment/:id' element={<Payment/>}/>
             {/* <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
             <Route path='/thank-you' element={<ThankYou/>} />
@@ -48,7 +49,6 @@ const Routers = () => {
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/mybookings' element={<MyBookings/>}/>
             <Route path='/mybookings/:id' element={<MyBookingDetails/>}/>
-            <Route path='/tours/payment/:id' element={<Payment/>}/>
             <Route path='/tours/payment/receipt/:id' element={<SubmitReceipt/>}/> */}
             <Route path='/about' element={<About/>}/>
         </Routes>

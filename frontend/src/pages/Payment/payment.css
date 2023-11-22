@@ -1,0 +1,77 @@
+.payment_container {
+    margin-top: 100px;
+}
+
+.insidePaymentContainer {
+    display: flex;
+    margin-top: 20px;
+}
+
+.viewPaymentDetails {
+    flex: 2;
+    padding: 30px 50px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    height: 100%;
+}
+
+.tourNameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tourNameTitle {
+    color: var(--secondary-color);
+}
+
+.line {
+    border: #ddd solid 1px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.details {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.itemDisplay {
+    color: #003B67;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.detailsItem {
+    font-weight: 600;
+    font-size: 16px;
+    color: gray;
+}
+
+.displayedIn4 {
+    font-weight: bold;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.displayedTourName {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--secondary-color);
+}
+
+.nextBtn {
+    width: 100%;
+    border: none;
+    background-color: #003B67;
+    font-weight: 600;
+    color: #fff;
+    padding: 7px 0px;
+    border-radius: 10px;
+}
+
+.nextBtn:hover {
+    background-color: #024477;
+    transition: 0.2s;
+}

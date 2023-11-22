@@ -112,7 +112,7 @@ const TourDetails = () => {
                                                 placeholder="Share your thoughts"
                                                 required />
 
-                                            <button className="btn primary__btn text-white"
+                                            <button className="btn submitBtn text-white"
                                                 type="submit">
                                                 Submit
                                             </button>
