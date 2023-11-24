@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useContext, useState } from "react";
 
 import { Container, Row, Button } from 'reactstrap';
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 
 import logo from '../../assets/images/logo.png';
 import './header.css';
@@ -35,6 +35,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     let [openMenu, setOpenMenu] = useState(false);
+    const [user, setUser] = useState(false)
 
     // const logout = () => {
     //     setOpenMenu(!openMenu);
@@ -117,52 +118,48 @@ const Header = () => {
                     <div className="nav__right d-flex align-items-center gap-4">
                         <div className="nav__btns d-flex align-items-center gap-4">
 
-                            {/* <h5 className="mb-0">
-                                    {user.username}
-                                </h5> */}
+                            {user ? <>
 
-                            <div className="menu__container">
-                                <div className="menu__trigger d-flex" onClick={() => { setOpenMenu(!openMenu) }}>
-                                    <img src={userIcon} alt="" />
-                                    <h5>Username</h5>
-                                </div>
-
-                                <div className={`dropdown__menu ${openMenu ? 'active' : 'inactive'}`}>
-                                    <div className="avatar__menu__container">
-                                        <img src={userIcon} className="avatar__menu" alt="" />
+                                <div className="menu__container">
+                                    <div className="menu__trigger d-flex" onClick={() => { setOpenMenu(!openMenu) }}>
+                                        <img src={userIcon} alt="" />
                                         <h5>Username</h5>
                                     </div>
 
+                                    <div className={`dropdown__menu ${openMenu ? 'active' : 'inactive'}`}>
+                                        <div className="avatar__menu__container">
+                                            <img src={userIcon} className="avatar__menu" alt="" />
+                                            <h5>Username</h5>
+                                        </div>
 
 
-                                    <ul>
 
-                                        {/* {user.email === "admin12@gmail.com"
+                                        <ul>
+
+                                            {/* {user.email === "admin12@gmail.com"
                                                     ? <DropDownItem img={tableGrid} text="Dashboard" onclick={navigateDashboard} />
                                                     : <>
                                                         <DropDownItem img={person} text="My Profile" onclick={navigateProfile} />
                                                         <DropDownItem img={booking} text="My Bookings" onclick={navigateBookings} />
                                                     </>} */}
 
-                                        <DropDownItem img={person} text="My Profile" />
-                                        <DropDownItem img={booking} text="My Bookings" />
-                                        <DropDownItem img={log_out} text="Logout" />
-                                    </ul>
+                                            <DropDownItem img={person} text="My Profile" />
+                                            <DropDownItem img={booking} text="My Bookings" />
+                                            <DropDownItem img={log_out} text="Logout" />
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* <Button className="btn btn-dark" onClick={logout}>
-                                    Logout
-                                </Button> */}
-                            {/* </> : <>
-                                    <Button className="btn secondary__btn">
-                                        <Link to='/login'>Login</Link>
-                                    </Button>
+                            </> : <>
+                                <Button className="btn secondary__btn">
+                                    <Link to='/login'>Login</Link>
+                                </Button>
 
-                                    <Button className="btn primary__btn">
-                                        <Link to='/register'>Register</Link>
-                                    </Button>
-                                </> */}
+                                <Button className="btn primary__btn">
+                                    <Link to='/register'>Register</Link>
+                                </Button>
+                            </>
+                            }
 
 
 
@@ -189,4 +186,4 @@ const DropDownItem = (props) => {
     )
 }
 
-export default Header;  
+export default Header;
