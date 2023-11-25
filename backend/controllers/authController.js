@@ -102,7 +102,10 @@ export const login = async (req, res) => {
             httpOnly: true,
             expires: token.expiresIn
         }).status(200).json({
+            // token,
+            success: true,
             token,
+            message: "successfully logged in",
             data: {...rest},
             role
         });
