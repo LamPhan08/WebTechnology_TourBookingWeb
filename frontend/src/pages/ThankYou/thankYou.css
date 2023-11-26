@@ -1,0 +1,17 @@
+#thankyou {
+    margin-top: 80px;
+}
+
+.thank__you span i {
+    font-size: 4rem;
+    color: green;
+}
+
+.thank__you h1 {
+    font-size: 3.6rem;
+    
+}
+
+.thank__you button {
+    font-weight: 500;
+}

@@ -27,19 +27,19 @@ const Payment = () => {
     const {id} = useParams()
     
     const handleSubmitReceipt = () => {
-        // navigate('/tours/payment/receipt/' + id, {state: {
-        //     //Truyền data theo navigate
-        //     tourname: bookingData.tourname,
-        //     totalPrice: location.state.totalPrice,
-        //     startDate: bookingData.startDate,
-        //     endDate: bookingData.endDate,
-        //     bookingDate: location.state.bookingDate,
-        //     fullName: location.state.fullName,
-        //     email: location.state.email,
-        //     phone: location.state.phone,
-        //     address: bookingData.address,
-        //     numberOfSeats: location.state.numberofSeats,
-        // }})
+        navigate('/tours/payment/receipt/' + id, {state: {
+            //Truyền data theo navigate
+            tourname: bookingData.tourname,
+            totalPrice: location.state.totalPrice,
+            startDate: bookingData.startDate,
+            endDate: bookingData.endDate,
+            bookingDate: location.state.bookingDate,
+            fullName: location.state.fullName,
+            email: location.state.email,
+            phone: location.state.phone,
+            address: bookingData.address,
+            numberOfSeats: location.state.numberofSeats,
+        }})
     }
 
     return (

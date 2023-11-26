@@ -1,0 +1,66 @@
+.submit_receipt_container {
+    margin-top: 80px;
+    width: 55% !important;
+}
+
+
+.insideSubmitReceiptContainer {
+    margin-top: 20px;
+    flex: 2;
+    padding: 30px 50px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    height: 100%;
+}
+
+.notice {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.btnZone {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.chooseFileBtn, .submitBtn {
+    background-color: #003B67;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 7px 0px;
+    width: 200px;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.chooseFileBtn:hover, .submitBtn:hover {
+    background-color: #024477;
+    transition: 0.2s;
+}
+
+
+
+.receiptImage {
+    border: #ddd solid 1px;
+    border-radius: 10px;
+    height: 500px;
+}
+
+.receiptImage img {
+    height: 500px;
+    border-radius: 10px;
+    width: 100%;
+    border: none;
+}
+
+.afterSubmittingNotice {
+    text-align: center;
+    align-items: center;
+    color: #A9A9A9;
+    font-weight: 600;
+}
