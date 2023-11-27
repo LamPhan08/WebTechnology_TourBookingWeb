@@ -23,14 +23,10 @@ const corsOptions = {
 mongoose.set("strictQuery", false);
 const connect = async() => {
     try {
-        await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-
-        console.log('MongoDB database connected!');
-    } catch (err) {
-        console.log('MongoDB database connection failed!');
+      await  mongoose.connect(process.env.MONGO_URI)
+      console.log("Mongo database is connected")
+    } catch (error) {
+        console.log("Mongo database is failed to connect")
     }
 };
 
