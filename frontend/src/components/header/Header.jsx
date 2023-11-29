@@ -45,6 +45,12 @@ const Header = () => {
         navigate('/');
     };
 
+
+    const navigateProfile = () => {
+        setOpenMenu(!openMenu)
+        navigate('/myprofile')
+    }
+
     const navigateBookings = () => {
         setOpenMenu(!openMenu)
         navigate('/mybookings')
@@ -153,7 +159,7 @@ const Header = () => {
                                                         <DropDownItem img={booking} text="My Bookings" onclick={navigateBookings} />
                                                     </>} */}
 
-                                            <DropDownItem img={person} text="My Profile" />
+                                            <DropDownItem img={person} text="My Profile" onclick={navigateProfile}/>
                                             <DropDownItem img={booking} text="My Bookings" onclick={navigateBookings}/>
                                             <DropDownItem img={log_out} text="Logout" onclick={logout}/>
                                         </ul>

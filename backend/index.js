@@ -14,6 +14,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT   ||  8000;
+console.log(port)
 const corsOptions = {
     origin: true,
     credentials: true
@@ -44,3 +45,4 @@ app.listen(port, () => {
     connect();
     console.log('server listening on port', port);
 });
+
