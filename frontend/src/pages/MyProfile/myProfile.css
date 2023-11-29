@@ -1,0 +1,99 @@
+.profile__container {
+    margin-top: 80px;
+    width: 50% !important;
+  }
+  
+  .profile {
+    padding: 20px;
+  }
+  
+  .profileIconContainer {
+    text-align: center;
+  }
+  
+  .profileContainer img {
+    width: 20%;
+  }
+  
+  .profileTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .profileTitle {
+    color: var(--secondary-color);
+  }
+  
+  .profileContainer {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  
+  .profileUpdate {
+    flex: 2;
+    padding: 30px 50px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+  }
+  
+  
+  .profileUpdateForm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .profileUpdateItem {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .profileUpdateItem>label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .profileUpdateInput {
+    border: none;
+    width: 500px;
+    height: 30px;
+    border-bottom: 1px solid gray;
+  
+  }
+  
+  .profileUpdateInput:focus {
+    border-bottom: 1px solid gray;
+    outline: none;
+  }
+  
+  .profileUpdateRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-left: 50px;
+  }
+  
+  
+  .profileUpdateButton {
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #003B67;
+    color: white;
+    font-weight: 600;
+    width: 200px;
+  }
+  
+  .profileUpdateButton:hover {
+    background: #05518b;
+    transition: 0.2s;
+  }
+  
+  .displayLabel {
+    font-weight: 600;
+  }

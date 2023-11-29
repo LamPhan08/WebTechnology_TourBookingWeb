@@ -14,6 +14,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT   ||  8000;
+console.log(port)
 const corsOptions = {
     origin: true,
     credentials: true
@@ -23,11 +24,7 @@ const corsOptions = {
 mongoose.set("strictQuery", false);
 const connect = async() => {
     try {
-        await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-
+        await mongoose.connect(process.env.MONGO_URI);
         console.log('MongoDB database connected!');
     } catch (err) {
         console.log('MongoDB database connection failed!');
@@ -48,3 +45,4 @@ app.listen(port, () => {
     connect();
     console.log('server listening on port', port);
 });
+

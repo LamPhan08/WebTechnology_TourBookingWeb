@@ -9,6 +9,8 @@ import Login from '../pages/Login/Login'
 import Register from '../pages/Register/Register'
 import SubmitReceipt from "../pages/SubmitReceipt/SubmitReceipt";
 import ThankYou from "../pages/ThankYou/ThankYou";
+import MyBookings from "../pages/MyBookings/MyBookings";
+import MyProfile from "../pages/MyProfile/MyProfile";
 // import Login from '../pages/Login'
 // import Register from '../pages/Register'
 // import SearchResultList from '../pages/SearchResultList'
@@ -41,6 +43,8 @@ const Routers = () => {
             <Route path='/tours/payment/receipt/:id' element={<SubmitReceipt/>} />
             <Route path='/about' element={<About/>}/> 
             <Route path='/thank-you' element={<ThankYou/>}/> 
+            <Route path='/mybookings' element={<MyBookings/>}/>
+            <Route path='/myprofile' element={<MyProfile/>}/>
             {/* <Route path='/thank-you' element={<ThankYou/>} />
             <Route path='/tours/search' element={<SearchResultList/>} />
             <Route path='/dashboard/tours/tourlist' element={<TourList/>}/>
@@ -54,7 +58,7 @@ const Routers = () => {
             <Route path='/dashboard/bookings' element={<BookingList/>}/>
             <Route path='/dashboard/bookings/bookingdetails/:id' element={<BookingDetails/>}/>
             <Route path='/profile' element={<Profile/>}/>
-            <Route path='/mybookings' element={<MyBookings/>}/>
+            
             <Route path='/mybookings/:id' element={<MyBookingDetails/>}/>
             <Route path='/tours/payment/receipt/:id' element={<SubmitReceipt/>}/> */}
             
