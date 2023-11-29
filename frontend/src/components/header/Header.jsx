@@ -45,6 +45,7 @@ const Header = () => {
         navigate('/');
     };
 
+
     const navigateProfile = () => {
         setOpenMenu(!openMenu)
         navigate('/myprofile')
