@@ -1,0 +1,24 @@
+.tourlist {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.view_tour {
+    font-size: 22px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.edit_tour {
+    font-size: 22px;
+    margin-right: 20px;
+    color: #0a8d4d;
+    cursor: pointer;
+}
+
+.delete_tour {
+    font-size: 22px;
+    color: red;
+    cursor: pointer;
+}

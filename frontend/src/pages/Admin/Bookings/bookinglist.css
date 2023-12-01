@@ -1,0 +1,62 @@
+.bookinglist {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.view_booking_details {
+    font-size: 22px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.edit_booking_details {
+    font-size: 22px;
+    margin-right: 20px;
+    color: #0a8d4d;
+    cursor: pointer;
+}
+
+.delete_booking {
+    font-size: 22px;
+    color: red;
+    cursor: pointer;
+}
+
+.tourNameValue {
+    color: #003B67;
+    font-weight: 600;
+}
+
+.totalPriceValue {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.contactItem {
+    align-items: center;
+}
+
+.contactIcons {
+    margin-right: 7px;
+}
+
+.bookingPaymentStatus {
+    font-weight: 600;
+}
+
+.pendingStatus {
+    color: #12b62d;
+}
+
+.approvedStatus {
+    color: #A9A9A9;
+}
+
+.invalidStatus {
+    color: red;
+}
+
+.errorIcon {
+    margin-left: 5px;
+}

@@ -16,7 +16,13 @@ import CustomerDetails from "../pages/Admin/Customers/CustomerDetail";
 import CustomerEdit from "../pages/Admin/Customers/CustomerEdit";
 import CustomerAdd from "../pages/Admin/Customers/CustomerAdd";
 import CustomerList from "../pages/Admin/Customers/CustomerList";
-import SearchResultList from "../pages/SearchResultList/SearchResultList";
+import SearchResultList from "../pages/SearchResultList/SearchResultList"
+import TourAdd from "../pages/Admin/Tours/TourAdd";
+import TourEdit from "../pages/Admin/Tours/TourEdit";
+import TourList from "../pages/Admin/Tours/TourList";
+import DashboardTourDetails from "../pages/Admin/Tours/DashboardTourDetails";
+import BookingList from "../pages/Admin/Bookings/BookingList";
+import BookingDetails from "../pages/Admin/Bookings/BookingDetails";
 
 // import Login from '../pages/Login'
 // import Register from '../pages/Register'
@@ -58,6 +64,12 @@ const Routers = () => {
             <Route path='/dashboard/customers/customerdetails/:id' element={<CustomerDetails/>}/>
             <Route path='/dashboard/customers/customeradd' element={<CustomerAdd/>}/>
             <Route path='/dashboard/customers/customeredit/:id' element={<CustomerEdit/>}/>
+            <Route path='/dashboard/tours/tourlist' element={<TourList/>}/>
+            <Route path='/dashboard/tours/tourdetails/:id' element={<DashboardTourDetails/>}/>
+            <Route path='/dashboard/tours/touradd' element={<TourAdd/>}/>
+            <Route path='/dashboard/tours/touredit/:id' element={<TourEdit/>}/>
+            <Route path='/dashboard/bookings' element={<BookingList/>}/>
+            <Route path='/dashboard/bookings/bookingdetails/:id' element={<BookingDetails/>}/>
             {/* <Route path='/thank-you' element={<ThankYou/>} />
             <Route path='/tours/search' element={<SearchResultList/>} />
             <Route path='/dashboard/tours/tourlist' element={<TourList/>}/>

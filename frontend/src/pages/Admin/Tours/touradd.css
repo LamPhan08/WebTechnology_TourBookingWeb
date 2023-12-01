@@ -1,0 +1,110 @@
+.newTour {
+    padding: 20px;
+}
+
+.newTour label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(151, 150, 150);
+}
+
+.newTourForm {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.newTourItem {
+    width: 490px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.newTourItem>label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000
+}
+
+
+.newTourItem>input {
+    height: 50px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+/* .newUserGender > input {
+    margin-top: 15px;
+  } */
+
+/* .newUserGender>label{
+      margin: 10px;
+      font-size: 18px;
+      color: #555;
+  } */
+
+.newTourSelect {
+    height: 50px;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.btn_zone {
+    width: 98%;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.newTourButton {
+    width: 200px;
+    border: none;
+    background-color: #003b67;
+    color: white;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+        
+}
+
+.newTourButton:hover {
+    background: #024477;
+    transition: 0.2s;
+}
+
+.uploadTourPhotoButton {
+    width: 200px;
+    border: none;
+    background-color: #003b67;
+    color: white !important;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px !important;
+}
+
+.uploadTourPhotoButton:hover {
+    background: #024477;
+    transition: 0.2s;
+}
+
+.tour__img {
+    width: 98%;
+    height: 800px;
+    margin-bottom: 50px;
+  
+}
+
+.description_input_zone {
+    width: 98%;
+    margin-bottom: 30px;
+}
