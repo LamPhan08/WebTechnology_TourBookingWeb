@@ -12,6 +12,12 @@ import ThankYou from "../pages/ThankYou/ThankYou";
 import MyBookings from "../pages/MyBookings/MyBookings";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import MyBookingDetails from "../pages/MyBookingDetails/MyBookingDetails";
+import CustomerDetails from "../pages/Admin/Customers/CustomerDetail";
+import CustomerEdit from "../pages/Admin/Customers/CustomerEdit";
+import CustomerAdd from "../pages/Admin/Customers/CustomerAdd";
+import CustomerList from "../pages/Admin/Customers/CustomerList";
+import SearchResultList from "../pages/SearchResultList/SearchResultList";
+
 // import Login from '../pages/Login'
 // import Register from '../pages/Register'
 // import SearchResultList from '../pages/SearchResultList'
@@ -47,6 +53,11 @@ const Routers = () => {
             <Route path='/mybookings' element={<MyBookings/>}/>
             <Route path='/myprofile' element={<MyProfile/>}/>
             <Route path='/mybookings/:id' element={<MyBookingDetails/>}/>
+            <Route path='/tours/search' element={<SearchResultList/>} />
+            <Route path='/dashboard/customers/customerlist' element={<CustomerList/>}/>
+            <Route path='/dashboard/customers/customerdetails/:id' element={<CustomerDetails/>}/>
+            <Route path='/dashboard/customers/customeradd' element={<CustomerAdd/>}/>
+            <Route path='/dashboard/customers/customeredit/:id' element={<CustomerEdit/>}/>
             {/* <Route path='/thank-you' element={<ThankYou/>} />
             <Route path='/tours/search' element={<SearchResultList/>} />
             <Route path='/dashboard/tours/tourlist' element={<TourList/>}/>
