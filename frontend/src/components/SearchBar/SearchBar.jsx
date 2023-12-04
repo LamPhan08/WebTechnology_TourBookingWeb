@@ -23,16 +23,16 @@ const SearchBar = () => {
             return alert("Please enter all information!");
         }
 
-        // const res = await fetch(`${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`);
+        const res = await fetch(`${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`);
 
-        // if(!res.ok) alert('Something went wrong...');
+        if(!res.ok) alert('Something went wrong...');
 
-        // const result = await res.json();
+        const result = await res.json();
 
-        // navigate(
-        //     `/tours/search?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`,
-        //     {state: result.data}
-        // );
+        navigate(
+            `/tours/search?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`,
+            {state: result.data}
+        );
 
     }
 

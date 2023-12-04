@@ -8,6 +8,7 @@ import Newsletter from "../../components/Newsletter/Newsletter";
 import Booking from "../../components/Booking/Booking";
 import tours from "../../assets/data/tours";
 
+
 const TourDetails = () => {
     const { id } = useParams();
     const reviewMsgRef = useRef('');

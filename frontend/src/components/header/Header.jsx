@@ -34,14 +34,14 @@ const Header = () => {
     const headerRef = useRef(null);
     const menuRef = useRef(null);
     const navigate = useNavigate();
-    // const { user, dispatch } = useContext(AuthContext);
+    const { user, dispatch } = useContext(AuthContext);
 
     let [openMenu, setOpenMenu] = useState(false);
-    const [user, setUser] = useState(true)
+    // const [user, setUser] = useState(true)
 
     const logout = () => {
         setOpenMenu(!openMenu);
-        // dispatch({ type: 'LOGOUT' });
+        dispatch({ type: 'LOGOUT' });
         navigate('/');
     };
 
@@ -137,15 +137,15 @@ const Header = () => {
                                 <div className="menu__container">
                                     <div className="menu__trigger d-flex" onClick={() => { setOpenMenu(!openMenu) }}>
                                         <img src={userIcon} alt="" />
-                                        {/* <h5>{user.username}</h5> */}
-                                        <h5>Username</h5>
+                                        <h5>{user.username}</h5>
+                                        {/* <h5>Username</h5> */}
                                     </div>
 
                                     <div className={`dropdown__menu ${openMenu ? 'active' : 'inactive'}`}>
                                         <div className="avatar__menu__container">
                                             <img src={userIcon} className="avatar__menu" alt="" />
-                                            <h5>Username</h5>
-                                            {/* <h5>{user.username}</h5> */}
+                                            {/* <h5>Username</h5> */}
+                                            <h5>{user.username}</h5>
                                         </div>
 
 
