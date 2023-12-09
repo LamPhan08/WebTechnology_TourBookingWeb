@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './submitReceipt.css'
 import { Container, Col, Row } from 'reactstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import Payment from '../Payment/Payment'
+import { AuthContext } from '../../context/AuthContext'
+import booking from '../../components/Booking/Booking'
+import { BASE_URL } from '../../utils/config'
 
 const SubmitReceipt = () => {
     const location = useLocation() //Nhận data booking
@@ -11,7 +15,9 @@ const SubmitReceipt = () => {
 
     console.log(location.state)
 
-    const handleCreateBooking = () => {
+    const { user } = useContext(AuthContext);
+
+    const handleCreateBooking = async (e) => {
         //Backend insert booking vào csdl (dùng data từ location.state.thuộc tính)
 
         // booking gồm các trường: {
@@ -29,6 +35,36 @@ const SubmitReceipt = () => {
         //     receiptImage: '' // => trường này lấy ảnh mới upload bỏ vào
         // }
 
+        e.preventDefault();
+
+        console.log();
+
+        try {
+            if(!user || user === undefined || user === null) {
+                return alert('Please sign in to continue!');
+            }
+
+            const res = await fetch(`${BASE_URL}/booking`, {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(
+                    booking
+                    // location.state
+                ),
+            });
+
+            const result = await res.json();
+            if(!res.ok) {
+                return alert(result.message);
+            }
+            navigate('/thank-you');
+        } catch (err) {
+            alert(err.message);
+        }
+
         // Insert rồi navigate qua trang Thank You
         navigate('/thank-you')
     }
@@ -40,6 +76,7 @@ const SubmitReceipt = () => {
     const handleUpload = (e) => {
         console.log(e.target.files);
         setFile(URL.createObjectURL(e.target.files[0]));
+
     }
 
     return (

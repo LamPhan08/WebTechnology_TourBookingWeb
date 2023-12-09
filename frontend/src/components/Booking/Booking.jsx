@@ -3,7 +3,8 @@ import './booking.css'
 import { Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-
+import { AuthContext } from "../../context/AuthContext.js";
+import { BASE_URL } from './../../utils/config';
 
 const Booking = ({ tour, avgRating }) => {
     const fullNameRef = useRef('')
@@ -15,6 +16,8 @@ const Booking = ({ tour, avgRating }) => {
     const navigate = useNavigate();
 
     const { id } = useParams()
+
+    const { user } = useContext(AuthContext);
 
      //Hàm trả về ngày hôm nay
      const getDate = () => {
@@ -48,6 +51,7 @@ const Booking = ({ tour, avgRating }) => {
         // Truyền dữ liệu tổng giá qua cho trang Payment
         navigate("/tours/payment/" + id, {
             state: {
+                tourName: tour.title,
                 bookingDate: booking.bookAt,
                 email: booking.userEmail,
                 fullName: booking.fullName,

@@ -7,10 +7,15 @@ import Newsletter from '../../components/Newsletter/Newsletter'
 import { Container, Row, Col } from "reactstrap";
 import tours from '../../assets/data/tours'
 
+import useFetch from '../../hooks/useFetch.js'
+import { BASE_URL } from "../../utils/config.js";
+
 const Tours = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
-  const tourCount = tours.length
+  
+  const {data: tours, loading, error} = useFetch(`${BASE_URL}/tours?page=${page}`);
+  const {data: tourCount} = useFetch(`${BASE_URL}/tours/search/getTourCount`);
 
   useEffect(() => {
     const pages = Math.ceil(tourCount / 8);
@@ -32,10 +37,10 @@ const Tours = () => {
 
       <section className="pt-0 mt-5">
         <Container>
-          {/* { loading && <h4 className="text-center pt-5">Loading......</h4> }
-                { error && <h4 className="text-center pt-5">{error}</h4> } */}
-          {/* {
-                    !loading && !error && */}
+          { loading && <h4 className="text-center pt-5">Loading......</h4> }
+                { error && <h4 className="text-center pt-5">{error}</h4> }
+          {
+                    !loading && !error &&
           <Row>
             {
               tours?.map(tour => (
@@ -59,7 +64,7 @@ const Tours = () => {
               </div>
             </Col>
           </Row>
-          {/* } */}
+          }
         </Container>
       </section>
 

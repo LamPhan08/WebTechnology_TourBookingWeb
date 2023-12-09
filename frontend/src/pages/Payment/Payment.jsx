@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './payment.css'
 import { Row, Col, Container } from 'reactstrap';
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
+import useFetch from '../../hooks/useFetch';
+import { BASE_URL } from '../../utils/config';
+import { AuthContext } from '../../context/AuthContext';
 
-//Data mẫu
-const bookingData = {
-    tourname: "Westminister Bridge",
-    total: 200,
-    startDate: "2023-01-01",
-    endDate: "2023-01-05",
-    bookingDate: "2022-12-28", // => trường này giá trị là "ngày hôm nay"
-    fullName: "Benjamin",
-    email: "benjamin1234@gmail.com",
-    phone: "0123456789",
-    address: "Somewhere",
-    guestSize: 8,
-    paymentStatus: '',
-    receiptImage: ''
-}
+// //Data mẫu
+// const bookingData = {
+//     tourname: "Westminister Bridge",
+//     total: 200,
+//     startDate: "2023-01-01",
+//     endDate: "2023-01-05",
+//     bookingDate: "2022-12-28", // => trường này giá trị là "ngày hôm nay"
+//     fullName: "Benjamin",
+//     email: "benjamin1234@gmail.com",
+//     phone: "0123456789",
+//     address: "Somewhere",
+//     guestSize: 8,
+//     paymentStatus: '',
+//     receiptImage: ''
+// }
 
 const Payment = () => {
     const location = useLocation(); // Nhận dữ liệu booking
@@ -25,21 +28,66 @@ const Payment = () => {
     const navigate = useNavigate()
 
     const {id} = useParams()
+
+    const {data:tour, loading, error} = useFetch(`${BASE_URL}/tours/${id}`);
+    const { photo, title, desc, price, address, reviews, city, distance, maxGroupSize } = tour
+    const {user} = useContext(AuthContext);
+    //Data mẫu
+    const bookingData = {
+        tourname: title,
+        total: 200,
+        startDate: "2023-01-01",
+        endDate: "2023-01-05",
+        bookingDate: "2022-12-28", // => trường này giá trị là "ngày hôm nay"
+        fullName: "Benjamin",
+        email: user.email,
+        phone: "0123456789",
+        address: "Somewhere",
+        guestSize: 8,
+        paymentStatus: '',
+        receiptImage: ''
+    }
+
+    //=== date
+    const date = new Date();
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    // const withSlashes = [year, month, day].join('/');
+    // console.log(withSlashes); // 👉️ "2023/7/25"
+
+    const dateStart = [year, month, day].join('-');
+    // console.log(withHyphens); // 👉️ "2023-7-25"
+    const dateEnd = [year, month, day + 5].join('-');
+
+    //===
     
     const handleSubmitReceipt = () => {
-        navigate('/tours/payment/receipt/' + id, {state: {
-            //Truyền data theo navigate
-            tourname: bookingData.tourname,
-            totalPrice: location.state.totalPrice,
-            startDate: bookingData.startDate,
-            endDate: bookingData.endDate,
-            bookingDate: location.state.bookingDate,
-            fullName: location.state.fullName,
-            email: location.state.email,
-            phone: location.state.phone,
-            address: bookingData.address,
-            numberOfSeats: location.state.numberofSeats,
-        }})
+        navigate('/tours/payment/receipt/' + id, {state: paymentData})
+    }
+
+    const paymentData = {
+        // tourname: bookingData.tourname,
+        // totalPrice: location.state.totalPrice,
+        // // startDate: bookingData.startDate,
+        // startDate: dateStart,
+        // endDate: bookingData.endDate,
+        // bookingDate: location.state.bookingDate,
+        // fullName: location.state.fullName,
+        // // email: location.state.email,
+        // email: bookingData.email,
+        // phone: location.state.phone,
+        // address: bookingData.address,
+        // numberOfSeats: location.state.numberofSeats,
+        userId: user._id,
+        userEmail: bookingData.email,
+        tourName: bookingData.tourname,
+        fullName: location.state.fullName,
+        guestSize: location.state.numberofSeats,
+        phone: location.state.phone,
+        bookAt: location.state.bookingDate
     }
 
     return (
@@ -102,7 +150,7 @@ const Payment = () => {
                                                 </Col>
 
                                                 <Col lg='7'>
-                                                    <div className='displayedIn4'>{bookingData.startDate}</div>
+                                                    <div className='displayedIn4'>{dateStart}</div>
                                                 </Col>
                                             </Row>
 
@@ -112,7 +160,7 @@ const Payment = () => {
                                                 </Col>
 
                                                 <Col lg='7'>
-                                                    <div className='displayedIn4'>{bookingData.endDate}</div>
+                                                    <div className='displayedIn4'>{dateEnd}</div>
                                                 </Col>
                                             </Row>
 
@@ -149,7 +197,7 @@ const Payment = () => {
                                                 </Col>
 
                                                 <Col lg='7'>
-                                                    <div className='displayedIn4'>{location.state.email}</div>
+                                                    <div className='displayedIn4'>{user.email}</div>
                                                 </Col>
                                             </Row>
 
