@@ -47,12 +47,11 @@ const SubmitReceipt = () => {
             const res = await fetch(`${BASE_URL}/booking`, {
                 method: 'post',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
                 },
                 credentials: 'include',
                 body: JSON.stringify(
-                    booking
-                    // location.state
+                    location.state
                 ),
             });
 
@@ -71,12 +70,13 @@ const SubmitReceipt = () => {
 
     //Upload hình
     const [file, setFile] = useState()
-    // console.log(file)
 
     const handleUpload = (e) => {
-        console.log(e.target.files);
+        // console.log(e.target.files);
         setFile(URL.createObjectURL(e.target.files[0]));
-
+        const imagePath = `/receipt-images/${e.target.files[0].name}`
+        console.log(imagePath)
+        location.state.receiptImage = imagePath
     }
 
     return (

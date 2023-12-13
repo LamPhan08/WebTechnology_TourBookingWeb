@@ -6,22 +6,6 @@ import useFetch from '../../hooks/useFetch';
 import { BASE_URL } from '../../utils/config';
 import { AuthContext } from '../../context/AuthContext';
 
-// //Data mẫu
-// const bookingData = {
-//     tourname: "Westminister Bridge",
-//     total: 200,
-//     startDate: "2023-01-01",
-//     endDate: "2023-01-05",
-//     bookingDate: "2022-12-28", // => trường này giá trị là "ngày hôm nay"
-//     fullName: "Benjamin",
-//     email: "benjamin1234@gmail.com",
-//     phone: "0123456789",
-//     address: "Somewhere",
-//     guestSize: 8,
-//     paymentStatus: '',
-//     receiptImage: ''
-// }
-
 const Payment = () => {
     const location = useLocation(); // Nhận dữ liệu booking
 
@@ -69,25 +53,19 @@ const Payment = () => {
     }
 
     const paymentData = {
-        // tourname: bookingData.tourname,
-        // totalPrice: location.state.totalPrice,
-        // // startDate: bookingData.startDate,
-        // startDate: dateStart,
-        // endDate: bookingData.endDate,
-        // bookingDate: location.state.bookingDate,
-        // fullName: location.state.fullName,
-        // // email: location.state.email,
-        // email: bookingData.email,
-        // phone: location.state.phone,
-        // address: bookingData.address,
-        // numberOfSeats: location.state.numberofSeats,
         userId: user._id,
-        userEmail: bookingData.email,
         tourName: bookingData.tourname,
+        total: location.state.totalPrice,
+        startDate: dateStart,
+        endDate: bookingData.endDate,
+        bookingDate: location.state.bookingDate,
         fullName: location.state.fullName,
-        guestSize: location.state.numberofSeats,
+        email: user.email,
         phone: location.state.phone,
-        bookAt: location.state.bookingDate
+        address: bookingData.address,
+        guestSize: location.state.numberofSeats,
+        receiptImage: '...',
+        numberOfSeats: location.state.numberofSeats,
     }
 
     return (
