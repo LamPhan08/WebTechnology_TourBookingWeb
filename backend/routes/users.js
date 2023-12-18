@@ -2,6 +2,7 @@ import express from 'express';
 
 import 
 { 
+    createUser,
     deleteUser, 
     getAllUser, 
     getSingleUser, 
@@ -23,5 +24,9 @@ router.get('/:id', verifyUser, getSingleUser);
 
 // get all user
 router.get('/', verifyAdmin, getAllUser);
+
+// create user
+router.post('/', createUser);
+// router.post('/', verifyAdmin, createUser); // have error: have to login as admin first
 
 export default router;

@@ -56,6 +56,10 @@ const Header = () => {
         navigate('/mybookings')
     }
 
+    const navigateDashboard = () => {
+        setOpenMenu(!openMenu)
+        navigate('/dashboard/customers/customerlist')
+    }
 
     const stickyHeaderFunc = () => {
         window.addEventListener('scroll', () => {
@@ -152,16 +156,20 @@ const Header = () => {
 
                                         <ul>
 
-                                            {/* {user.email === "admin12@gmail.com"
-                                                    ? <DropDownItem img={tableGrid} text="Dashboard" onclick={navigateDashboard} />
+                                            {user.email === "admin@gmail.com"
+                                                    ? <>
+                                                        <DropDownItem img={tableGrid} text="Dashboard" onclick={navigateDashboard} />
+                                                        <DropDownItem img={log_out} text="Logout" onclick={logout}/>
+                                                    </>
                                                     : <>
                                                         <DropDownItem img={person} text="My Profile" onclick={navigateProfile} />
                                                         <DropDownItem img={booking} text="My Bookings" onclick={navigateBookings} />
-                                                    </>} */}
+                                                        <DropDownItem img={log_out} text="Logout" onclick={logout}/>
+                                                    </>}
 
-                                            <DropDownItem img={person} text="My Profile" onclick={navigateProfile}/>
+                                            {/* <DropDownItem img={person} text="My Profile" onclick={navigateProfile}/>
                                             <DropDownItem img={booking} text="My Bookings" onclick={navigateBookings}/>
-                                            <DropDownItem img={log_out} text="Logout" onclick={logout}/>
+                                            <DropDownItem img={log_out} text="Logout" onclick={logout}/> */}
                                         </ul>
                                     </div>
                                 </div>

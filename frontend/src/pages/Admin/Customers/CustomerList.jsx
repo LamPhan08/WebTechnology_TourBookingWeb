@@ -7,11 +7,16 @@ import './customerlist.css'
 import { Link } from 'react-router-dom';
 import customerData from '../../../assets/data/customers'
 
+import useFetch from '../../../hooks/useFetch.js'
+import { BASE_URL } from "../../../utils/config.js";
+
 const CustomerList = () => {
-  const [data, setData] = useState(customerData)
+  const [data1, setData] = useState(customerData)
+  // const {data: users} = useFetch(`${BASE_URL}/users`);
+  // const {data: users, loading, error} = useFetch(`${BASE_URL}/users`);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id))
+    // setData(data.filter((item) => item.id !== id))
   }
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -44,7 +49,7 @@ const CustomerList = () => {
   return (
     <div className="customerlist">
       <DataGrid
-        rows={data}
+        rows={data1}
         columns={columns}
         initialState={{
           pagination: {

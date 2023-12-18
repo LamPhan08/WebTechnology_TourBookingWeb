@@ -47,6 +47,15 @@ const tourSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    startDate: {
+      type: String,
+    },
+    endDate: {
+      type: String,
+    },
+    itinerary: {
+      type: String,
+    }
   },
   { timestamps: true }
 );
