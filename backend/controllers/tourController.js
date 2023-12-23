@@ -92,8 +92,8 @@ export const getAllTour = async (req, res) => {
     try {
         const tours = await Tour.find({})
         // .populate('reviews')
-        .skip(page * 8)
-        .limit(8);
+        // .skip(page * 8)
+        // .limit(8);
 
         res.status(200).json({
             success: true,

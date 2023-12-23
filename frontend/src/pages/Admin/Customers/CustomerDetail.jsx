@@ -3,14 +3,23 @@ import { MdCalendarToday, MdLocationSearching, MdMailOutline, MdPermIdentity, Md
 import './customeredit.css'
 import customerData from '../../../assets/data/customers'
 import { useParams, Link } from 'react-router-dom'
+import useFetch from '../../../hooks/useFetch'
+import { BASE_URL } from '../../../utils/config'
 
 const CustomerDetails = () => {
   const { id } = useParams();
+  const { data: customer } = useFetch(`${BASE_URL}/users/${id}`);
 
-  const customer = customerData.find(customer => customer.id === id);
+  // const customer = customerData.find(customer => customer.id === id);
+  console.log(customer);
 
-  const { fullname, username, email, phone, address, dateofbirth } = customer;
+  if (!customer) {
+    // Handle the case when data is still loading or customer is not found
+    return <div>Loading...</div>;
+    
+  }
 
+  const { fullName, username, email, phoneNumber, address, dateOfBirth } = customer;
   return (
     <div className="user">
       <div className="userTitleContainer">
@@ -28,7 +37,7 @@ const CustomerDetails = () => {
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">{fullname}</span>
+              <span className="userShowUsername">{fullName}</span>
               {/* <span className="userShowUserTitle">Software Engineer</span> */}
             </div>
           </div>
@@ -40,12 +49,12 @@ const CustomerDetails = () => {
             </div>
             <div className="userShowInfo">
               <MdCalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">{dateofbirth}</span>
+              <span className="userShowInfoTitle">{dateOfBirth}</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
               <MdPhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">{phone}</span>
+              <span className="userShowInfoTitle">{phoneNumber}</span>
             </div>
             <div className="userShowInfo">
               <MdMailOutline className="userShowIcon" />
@@ -73,12 +82,12 @@ const CustomerDetails = () => {
               </div>
               <div className="userUpdateItem">
                 <label>Full Name</label>
-                <span className="userUpdateInput">{fullname}</span>
+                <span className="userUpdateInput">{fullName}</span>
               </div>
 
               <div className="userUpdateItem">
                 <label>Phone</label>
-                <span className="userUpdateInput">{phone}</span>
+                <span className="userUpdateInput">{phoneNumber}</span>
 
               </div>
               <div className="userUpdateItem">
@@ -87,7 +96,7 @@ const CustomerDetails = () => {
               </div>
               <div className="userUpdateItem">
                 <label>Date of Birth</label>
-                <span className="userUpdateInput">{dateofbirth}</span>
+                <span className="userUpdateInput">{dateOfBirth}</span>
               </div>
             </div>
             <div className="userUpdateRight">

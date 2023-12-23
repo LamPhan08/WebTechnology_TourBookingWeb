@@ -61,25 +61,25 @@ const Header = () => {
         navigate('/dashboard/customers/customerlist')
     }
 
-    const stickyHeaderFunc = () => {
-        window.addEventListener('scroll', () => {
-            if (
-                document.body.scrollTop > 80 ||
-                document.documentElement.scrollTop > 80
-            ) {
-                headerRef.current.classList.add("sticky__header");
-            }
-            else {
-                headerRef.current.classList.remove("sticky__header");
-            }
-        });
-    };
+    // const stickyHeaderFunc = () => {
+    //     window.addEventListener('scroll', () => {
+    //         if (
+    //             document.body.scrollTop > 80 ||
+    //             document.documentElement.scrollTop > 80
+    //         ) {
+    //             // headerRef.current.classList.add("sticky__header");
+    //         }
+    //         else {
+    //             // headerRef.current.classList.remove("sticky__header");
+    //         }
+    //     });
+    // };
 
-    useEffect(() => {
-        stickyHeaderFunc();
+    // useEffect(() => {
+    //     stickyHeaderFunc();
 
-        return window.removeEventListener('scroll', stickyHeaderFunc);
-    });
+    //     return window.removeEventListener('scroll', stickyHeaderFunc);
+    // });
 
     // const toggleMenu = () => menuRef.current.classList.toggle('show__menu');
 

@@ -12,7 +12,7 @@ const TourAdd = () => {
   const [address, setAddress] = useState('');
   const [distance, setDistance] = useState('');
   const [photo, setPhoto] = useState('');
-  const [description, setDescription] = useState('');
+  const [desc, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [maxGroupSize, setMaxGroupSize] = useState('');
   const [featured, setFeatured] = useState('');
@@ -35,7 +35,7 @@ const TourAdd = () => {
   const navigate = useNavigate();
 
   const displayInfo = () => {
-    alert(`${title}\n${city}\n${address}\n${distance}\n${photo}\n${description}\n${price}\n${maxGroupSize}\n${featured}\n${startDate}\n${endDate}\n${itinerary}`);
+    alert(`${title}\n${city}\n${address}\n${distance}\n${photo}\n${desc}\n${price}\n${maxGroupSize}\n${featured}\n${startDate}\n${endDate}\n${itinerary}`);
   }
 
   const handleClick = async e => {
@@ -53,7 +53,7 @@ const TourAdd = () => {
               address,
               distance,
               photo,
-              description,
+              desc,
               price,
               maxGroupSize,
               featured,
@@ -63,6 +63,7 @@ const TourAdd = () => {
             })
         });
         const result = await res.json();
+        console.log(result);
 
         if(!res.ok) {
             alert(result.message);
@@ -189,8 +190,12 @@ const TourAdd = () => {
         <label style={{color: "#000"}}>Description</label>
         <ReactQuill className='description_input_zone' 
                     theme='snow' 
-                    value={description} 
-                    onChange={setDescription}
+                    value={desc} 
+                    // onChange={setDescription}
+                    onChange={(content, delta, source, editor) => {
+                      // Update the state with only the plain text content
+                      setDescription(editor.getText().trim());
+                    }}
                     placeholder="Enter Description"/>
       </div>
 
@@ -199,7 +204,11 @@ const TourAdd = () => {
         <ReactQuill className='description_input_zone' 
                     theme='snow' 
                     value={itinerary} 
-                    onChange={setItinerary}
+                    // onChange={setItinerary}
+                    onChange={(content, delta, source, editor) => {
+                      // Update the state with only the plain text content
+                      setItinerary(editor.getText().trim());
+                    }}
                     placeholder="Enter Itinerary"/>
       </div>
 

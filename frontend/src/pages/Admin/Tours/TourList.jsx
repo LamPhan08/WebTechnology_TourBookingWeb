@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import { MdDeleteOutline } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
@@ -6,6 +6,8 @@ import { GrView } from 'react-icons/gr';
 import './tourlist.css'
 import { Link } from 'react-router-dom';
 import tourData from '../../../assets/data/tours'
+import useFetch from '../../../hooks/useFetch.js'
+import { BASE_URL } from "../../../utils/config.js";
 
 // const rows = [
 //   { id: 1, city: 'Snow', address: 'Jon', title: 'unknown', distance: 100, maxGroupSize: 10, price: 35 },
@@ -32,10 +34,20 @@ import tourData from '../../../assets/data/tours'
 
 
 const TourList = () => {
-  const [data, setData] = useState(tourData)
+  // const [data, setData] = useState(tourData)
+  const [data1, setData] = useState([])
+  const {data: tours} = useFetch(`${BASE_URL}/tours`);
+
+  useEffect(() => {
+    if (tours) {
+      // Map over the fetched data and add an 'id' property
+      const dataWithIds = tours.map((user) => ({ ...user, id: user._id })); 
+      setData(dataWithIds);
+    }
+  }, [tours]);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id))
+    // setData(data.filter((item) => item.id !== id))
   }
 
   const columns = [
@@ -83,7 +95,7 @@ const TourList = () => {
   return (
     <div className="tourlist">
       <DataGrid
-        rows={data}
+        rows={data1}
         columns={columns}
         initialState={{
           pagination: {

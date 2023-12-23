@@ -2,20 +2,41 @@ import React, {useState} from 'react'
 import './touradd.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import tourData from '../../../assets/data/tours'
+import useFetch from '../../../hooks/useFetch';
+import { BASE_URL } from '../../../utils/config';
 
 const TourEdit = () => {
   const {id} = useParams();
-  const tour = tourData.find(tour => tour.id === id)
-  const { photo, title, desc, price, address, itinerary, city, distance, maxGroupSize, startDate, endDate, featured } = tour
-  const [description, setDescription] = useState(desc);
-  const [_itinerary, setItinerary] = useState(itinerary);
+  // const tour = tourData.find(tour => tour.id === id)
+  const navigate = useNavigate();
 
-  const [file, setFile] = useState(photo);
-    function handleUpload(e) {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
+  const { data: tour } = useFetch(`${BASE_URL}/tours/${id}`);
+  // Use the || operator to provide default values if the data is not available
+  const [description, setDescription] = useState(tour?.desc || "");
+  const [_itinerary, setItinerary] = useState(tour?.itinerary || "");
+  const [file, setFile] = useState(tour?.photo || "");
+
+  if (!tour) {
+    return <div>Loading...</div>;
+  }
+
+  const {
+    title,
+    price,
+    address,
+    city,
+    distance,
+    maxGroupSize,
+    startDate,
+    endDate,
+    featured,
+  } = tour;
+
+  function handleUpload(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
   }
 
   return (

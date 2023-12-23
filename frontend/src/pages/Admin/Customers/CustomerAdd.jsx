@@ -10,9 +10,9 @@ const CustomerAdd = () => {
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
-  const [dob, setDOB] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const displayInfo = () => {
-    alert(`${username}\n${fullName}\n${email}\n${password}\n${phoneNumber}\n${address}\n${dob}`);
+    alert(`${username}\n${fullName}\n${email}\n${password}\n${phoneNumber}\n${address}\n${dateOfBirth}`);
   }
 
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const CustomerAdd = () => {
               password,
               phoneNumber,
               address,
-              dob
+              dateOfBirth
             })
         });
         const result = await res.json();
@@ -125,9 +125,9 @@ const CustomerAdd = () => {
         <div className="newUserItem">
           <label>Date of birth</label>
           <input type="date"
-            value={dob}
+            value={dateOfBirth}
             onChange={(text) => {
-              setDOB(text.target.value);
+              setDateOfBirth(text.target.value);
             }}
           />
         </div>

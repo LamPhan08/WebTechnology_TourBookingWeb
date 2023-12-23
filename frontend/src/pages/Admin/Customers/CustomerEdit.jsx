@@ -2,14 +2,58 @@ import React from 'react'
 import { MdCalendarToday, MdLocationSearching, MdMailOutline, MdPermIdentity, MdPhoneAndroid } from 'react-icons/md'
 import './customeredit.css'
 import customerData from '../../../assets/data/customers'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
+import useFetch from '../../../hooks/useFetch'
+import { BASE_URL } from '../../../utils/config'
 
 const CustomerEdit = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const customer = customerData.find(customer => customer.id === id);
+  // const customer = customerData.find(customer => customer.id === id);
 
-  const { fullname, username, email, phone, address, dateofbirth } = customer;
+  // const { fullname, username, email, phone, address, dateofbirth } = customer;
+  const { data: customer } = useFetch(`${BASE_URL}/users/${id}`);
+
+  // const customer = customerData.find(customer => customer.id === id);
+  console.log(customer);
+
+  if (!customer) {
+    // Handle the case when data is still loading or customer is not found
+    return <div>Loading...</div>;
+    
+  }
+
+  const { fullName, username, email, phoneNumber, address, dateOfBirth } = customer;
+
+  const handleClick = async e => {
+    e.preventDefault();
+
+    try {
+        const res = await fetch(`${BASE_URL}/users/${id}`, {
+            method: 'put',
+            headers: {
+                'content-type':'application/json'
+            },
+            body: JSON.stringify({
+              username,
+              fullName,
+              email,
+              phoneNumber,
+              address,
+              dateOfBirth
+            })
+        });
+        const result = await res.json();
+
+        if(res.ok) {
+            alert(result.message);
+            navigate('/dashboard/customers/customerlist');
+        }
+    } catch (err) {
+        alert(err.message);
+    }
+  }
 
   return (
     <div className="user">
@@ -28,7 +72,7 @@ const CustomerEdit = () => {
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">{fullname}</span>
+              <span className="userShowUsername">{fullName}</span>
               {/* <span className="userShowUserTitle">Software Engineer</span> */}
             </div>
           </div>
@@ -40,12 +84,12 @@ const CustomerEdit = () => {
             </div>
             <div className="userShowInfo">
               <MdCalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">{dateofbirth}</span>
+              <span className="userShowInfoTitle">{dateOfBirth}</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
               <MdPhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">{phone}</span>
+              <span className="userShowInfoTitle">{phoneNumber}</span>
             </div>
             <div className="userShowInfo">
               <MdMailOutline className="userShowIcon" />
@@ -81,7 +125,7 @@ const CustomerEdit = () => {
                 <label>Full Name</label>
                 <input
                   type="text"
-                  placeholder={fullname}
+                  placeholder={fullName}
                   className="userUpdateInput"
                 />
               </div>
@@ -90,7 +134,7 @@ const CustomerEdit = () => {
                 <label>Phone</label>
                 <input
                   type="text"
-                  placeholder={phone}
+                  placeholder={phoneNumber}
                   className="userUpdateInput"
                 />
               </div>
@@ -106,7 +150,7 @@ const CustomerEdit = () => {
                 <label>Address</label>
                 <input
                   type="date"
-                  defaultValue={dateofbirth}
+                  defaultValue={dateOfBirth}
                   className="userUpdateInput"
                 />
               </div>
@@ -125,7 +169,7 @@ const CustomerEdit = () => {
               </div> */}
 
               <Link to={"/dashboard/customers/customerdetails/" + id}>
-                <button className="userUpdateButton">Update</button>
+                <button className="userUpdateButton" onClick={handleClick}>Update</button>
               </Link>
             </div>
           </form>
