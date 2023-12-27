@@ -67,7 +67,7 @@ const TourAdd = () => {
 
         if(!res.ok) {
             alert(result.message);
-            // navigate('/dashboard/tours/tourlist');
+            navigate('/dashboard/tours/tourlist');
         }
     } catch (err) {
         alert(err.message);
@@ -214,7 +214,7 @@ const TourAdd = () => {
 
       <div className='btn_zone'>
 
-        <button className="newTourButton" onClick={displayInfo}>Create</button>
+        <button className="newTourButton" onClick={handleClick}>Create</button>
       </div>
      
     </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdCalendarToday, MdLocationSearching, MdMailOutline, MdPermIdentity, MdPhoneAndroid } from 'react-icons/md'
 import './customeredit.css'
 import customerData from '../../../assets/data/customers'
@@ -10,10 +10,39 @@ const CustomerEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  
+
   // const customer = customerData.find(customer => customer.id === id);
 
   // const { fullname, username, email, phone, address, dateofbirth } = customer;
   const { data: customer } = useFetch(`${BASE_URL}/users/${id}`);
+
+  const [formData, setFormData] = useState({
+    fullName: '',
+    username: '',
+    phoneNumber: '',
+    address: '',
+    dateOfBirth: ''
+  })
+
+  useEffect(() => {
+    setFormData({
+      fullName: customer.fullName,
+      username: customer.username,
+      phoneNumber: customer.phoneNumber,
+      address: customer.address,
+      dateOfBirth: customer.dateOfBirth
+    })
+  }, [customer])
+
+  const handleInputChange = (e, fieldName) => {
+    setFormData({...formData, [fieldName]: e.target.value})
+  }
+
+  // const handleInputChange = (e) => {
+  //   const {name, value} = e.target;
+  //   return setFormData({...formData, [name]: value})
+  // }
 
   // const customer = customerData.find(customer => customer.id === id);
   console.log(customer);
@@ -35,14 +64,9 @@ const CustomerEdit = () => {
             headers: {
                 'content-type':'application/json'
             },
-            body: JSON.stringify({
-              username,
-              fullName,
-              email,
-              phoneNumber,
-              address,
-              dateOfBirth
-            })
+            body: JSON.stringify(
+              formData
+            )
         });
         const result = await res.json();
 
@@ -111,14 +135,17 @@ const CustomerEdit = () => {
                   type="text"
                   placeholder={email}
                   className="userUpdateInput"
+                  readOnly
                 />
               </div>
               <div className="userUpdateItem">
                 <label>Username</label>
                 <input
                   type="text"
-                  placeholder={username}
+                  placeholder="abc"
                   className="userUpdateInput"
+                  value={formData.username}
+                  onChange={(e) => handleInputChange(e, 'username')}
                 />
               </div>
               <div className="userUpdateItem">
@@ -127,6 +154,8 @@ const CustomerEdit = () => {
                   type="text"
                   placeholder={fullName}
                   className="userUpdateInput"
+                  value={formData.fullName}
+                  onChange={(e) => handleInputChange(e, 'fullName')}
                 />
               </div>
 
@@ -136,6 +165,8 @@ const CustomerEdit = () => {
                   type="text"
                   placeholder={phoneNumber}
                   className="userUpdateInput"
+                  value={formData.phoneNumber}
+                  onChange={(e) => handleInputChange(e, 'phoneNumber')}
                 />
               </div>
               <div className="userUpdateItem">
@@ -144,6 +175,8 @@ const CustomerEdit = () => {
                   type="text"
                   placeholder={address}
                   className="userUpdateInput"
+                  value={formData.address}
+                  onChange={(e) => handleInputChange(e, 'address')}
                 />
               </div>
               <div className="userUpdateItem">
@@ -152,6 +185,8 @@ const CustomerEdit = () => {
                   type="date"
                   defaultValue={dateOfBirth}
                   className="userUpdateInput"
+                  value={formData.dateOfBirth}
+                  onChange={(e) => handleInputChange(e, 'dateOfBirth')}
                 />
               </div>
             </div>

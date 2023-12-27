@@ -4,15 +4,44 @@ import { useParams } from 'react-router-dom';
 import bookingData from '../../../assets/data/bookings'
 import './bookingdetails.css'
 import { useState } from 'react';
+import useFetch from '../../../hooks/useFetch';
+import { BASE_URL } from '../../../utils/config';
 
 const BookingDetails = () => {
     // Lấy thông tin từ bookingData bằng cách dùng useParams
     const { id } = useParams();
-    const booking = bookingData.find(_booking => _booking.id === id)
-    const { tourname, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking
-    //
+    // const booking = bookingData.find(_booking => _booking.id === id)
+    // const { tourname, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking
+    const { data: booking } = useFetch(`${BASE_URL}/booking/${id}`);
+
+    const [status, setStatus] = useState({
+        paymentStatus: booking.paymentStatus
+    })
+
+    // const handleInputChange = (e, fieldName) => {
+    //     setStatus({...status, [fieldName]: e.target.value})
+    // }
 
     const [viewImage, setViewImage] = useState(false)
+
+    // const customer = customerData.find(customer => customer.id === id);
+    console.log(booking);
+
+    if (!booking) {
+        // Handle the case when data is still loading or customer is not found
+        return <div>Loading...</div>;
+        
+    }
+
+    // const handleClick = () => {
+    //     alert(`${status.paymentStatus}`)
+    // }
+    
+
+    const { tourName, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking;
+    //
+
+    
 
     const handleViewImage = () => {
         setViewImage(!viewImage)
@@ -25,7 +54,7 @@ const BookingDetails = () => {
                     {/*  */}
                     <div className="viewBookingDetails">
                         <div className="tourNameContainer">
-                            <h4 className="tourNameTitle">{tourname}</h4>
+                            <h4 className="tourNameTitle">{tourName}</h4>
                         </div>
 
                         <div className='divideLine'></div>
@@ -63,7 +92,7 @@ const BookingDetails = () => {
                                         </Col>
 
                                         <Col lg='7'>
-                                            <div className='displayedTourName'>{tourname}</div>
+                                            <div className='displayedTourName'>{tourName}</div>
                                         </Col>
                                     </Row>
 
@@ -160,14 +189,14 @@ const BookingDetails = () => {
 
                                     <div className='divideLine'></div>
 
-                                    <select className="paymentStatusSelect mb-4">
+                                    <select className="paymentStatusSelect mb-4" value={status.paymentStatus}>
                                         <option value="pending" selected={paymentStatus === 'Pending' ? true : false}>Pending</option>
                                         <option value="approved" selected={paymentStatus === 'Approved' ? true : false}>Approved</option>
                                         <option value="invalid" selected={paymentStatus === 'Invalid Receipt' ? true : false}>Invalid Receipt</option>
                                     </select>
 
                                     <div className='mb-3'>
-                                        <button className='updateStatusBtn'>
+                                        <button className='updateStatusBtn' onClick={() => {}}>
                                             Update Status
                                         </button>
                                     </div>

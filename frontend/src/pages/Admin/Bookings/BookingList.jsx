@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import { MdDeleteOutline, MdEmail, MdError } from 'react-icons/md';
 import { GrView } from 'react-icons/gr';
@@ -7,13 +7,27 @@ import bookingData from '../../../assets/data/bookings'
 import './bookinglist.css'
 import {ImPhone} from 'react-icons/im'
 import { BsCheck } from 'react-icons/bs'
+import useFetch from '../../../hooks/useFetch';
+import { BASE_URL } from '../../../utils/config';
 
 
 const BookingList = () => {
-  const [data, setData] = useState(bookingData)
+  // const [data, setData] = useState(bookingData)
+
+  const [data1, setData] = useState([])
+  // const [dataDemo, setDataDemo] = useState(customerData)
+  const {data: users} = useFetch(`${BASE_URL}/booking`);
+
+  useEffect(() => {
+    if (users) {
+      // Map over the fetched data and add an 'id' property
+      const dataWithIds = users.map((user) => ({ ...user, id: user._id }));
+      setData(dataWithIds);
+    }
+  }, [users]);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id))
+    // setData(data.filter((item) => item.id !== id))
   }
 
   const columns = [
@@ -102,7 +116,7 @@ const BookingList = () => {
   return (
     <div className="bookinglist">
       <DataGrid
-        rows={data}
+        rows={data1}
         columns={columns}
         initialState={{
           pagination: {
