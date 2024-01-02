@@ -6,7 +6,7 @@ import receipt from '../images/receipt.png' // ảnh biên lai
 const bookings = [
     {
       id: "01",
-      tourname: "Westminister Bridge",
+      tourName: "Westminister Bridge",
       total: 200,
       startDate: "2023-01-01",
       endDate: "2023-01-05",
@@ -21,7 +21,7 @@ const bookings = [
     },
     {
       id: "02",
-      tourname: "Bali, Indonesia",
+      tourName: "Bali, Indonesia",
       total: 180,
       startDate: "2023-01-01",
       endDate: "2023-01-05",
@@ -36,7 +36,7 @@ const bookings = [
     },
     {
       id: "03",
-      tourname: "Snowy Mountains, Thailand",
+      tourName: "Snowy Mountains, Thailand",
       total: 170,
       startDate: "2023-01-01",
       endDate: "2023-01-05",
@@ -51,7 +51,7 @@ const bookings = [
     },
     {
       id: "04",
-      tourname: "Beautiful Sunrise, Thailand",
+      tourName: "Beautiful Sunrise, Thailand",
       total: 250,
       startDate: "2023-01-01",
       endDate: "2023-01-05",
@@ -66,7 +66,7 @@ const bookings = [
     },
     {
       id: "05",
-      tourname: "Nusa Pendia Bali, Indonesia",
+      tourName: "Nusa Pendia Bali, Indonesia",
       total: 400,
       startDate: "2023-01-01",
       endDate: "2023-01-05",
@@ -81,7 +81,7 @@ const bookings = [
     },
     {
       id: "06",
-      tourname: "Cherry Blossoms Spring, Japan",
+      tourName: "Cherry Blossoms Spring, Japan",
       total: 600,
       startDate: "2023-01-01",
       endDate: "2023-01-05",
@@ -96,7 +96,7 @@ const bookings = [
     },
     {
       id: "07",
-      tourname: "Holmen Lofoten, France",
+      tourName: "Holmen Lofoten, France",
       total: 350,
       startDate: "2023-01-01",
       endDate: "2023-01-05",
@@ -111,7 +111,7 @@ const bookings = [
     },
     {
       id: "08",
-      tourname: "Snowy Mountains, Thailand",
+      tourName: "Snowy Mountains, Thailand",
       total: 380,
       startDate: "2023-01-01",
       endDate: "2023-01-05",

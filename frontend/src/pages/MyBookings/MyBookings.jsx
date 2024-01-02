@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './myBookings.css'
 import { Row, Col, Container } from 'reactstrap'
 import bookingData from '../../assets/data/bookings'
@@ -6,18 +6,39 @@ import { DataGrid } from '@mui/x-data-grid';
 import { BsCheck } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
 import {MdError} from 'react-icons/md'
+import useFetch from '../../hooks/useFetch';
+import { BASE_URL } from '../../utils/config';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const MyBookings = () => {
-  const navigate = useNavigate()
+    const navigate = useNavigate()
+    const [data1, setData] = useState([])
+    const { user, dispatch } = useContext(AuthContext);
+    const { data: allBookings } = useFetch(`${BASE_URL}/booking`);
+    
+
+    useEffect(() => {
+        if (allBookings) {
+          // Map over the fetched data and add an 'id' property
+          const dataWithIds = allBookings.map((booking) => ({ ...booking, id: booking._id })); 
+          setData(dataWithIds);
+        }
+    }, [allBookings]);
+
+    const userId = user._id;
+    const userBookings = data1.filter(booking => booking.userId === userId);
+    console.log(userBookings)
+    // const {tourName, startDate, total, paymentStatus} = userBookings
 
     const handleRowClick = (params) => {
-        navigate('/mybookings/' + params.id)
+        navigate('/myBooking/' + params.id)
+        // navigate('/mybookings/' + params.row.id)
     };
 
     const columns = [
         {
-            field: 'tourname',
+            field: 'tourName',
             headerName: 'Tour Name',
             width: 500,
             renderCell: (params) => {
@@ -80,7 +101,7 @@ const MyBookings = () => {
                                 <div className="currentBookingsList">
                                     <DataGrid
                                         className='bookingDatagrid'
-                                        rows={bookingData}
+                                        rows={userBookings}
                                         columns={columns}
                                         disableRowSelectionOnClick
                                         rowModesModel={false}

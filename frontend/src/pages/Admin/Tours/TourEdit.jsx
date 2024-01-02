@@ -62,14 +62,53 @@ const TourEdit = () => {
     })
   }, [tour])
 
-  const handleInputChange = (e, fieldName) => {
-    setFormData({ ...formData, [fieldName]: e });
+  // const handleInputChange = (e, fieldName) => {
+  //   setFormData({ ...formData, [fieldName]: e });
+  // }
+
+  const handleChange = e => {
+    console.log(e.target.name)
+    setFormData({...formData, [e.target.name]: e.target.value});
+  };
+
+  const handleDesc = e => {
+    setFormData({...formData, [formData.desc]: e.target.value});
+  };
+
+  const handleItinerary = e => {
+    setFormData({...formData, [formData.itinerary]: e.target.value});
+  };
+
+  const handleQuillChangeDesc = (content, delta, source, editor) => {    
+    setFormData({ ...formData, desc: editor.getText() });   
+  };
+
+  const handleQuillChangeItinerary = (content, delta, source, editor) => {    
+    setFormData({ ...formData, itinerary: editor.getText() });   
+  };
+
+  // const handleQuillChange = (value, fieldName) => {
+  //   setFormData({ ...formData, [fieldName]: value });
+  //   // setFormData(prevFormData => ({ ...prevFormData, [fieldName]: value }));
+  // };
+
+  const handleQuillEditDesc = (value) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        desc: value
+      }
+    })
   }
 
-  const handleQuillChange = (value, fieldName) => {
-    // setFormData({ ...formData, [fieldName]: value });
-    setFormData(prevFormData => ({ ...prevFormData, [fieldName]: value }));
-  };
+  const handleQuillEditItinerary = (value) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        itinerary: value
+      }
+    })
+  }
   
 
   // Use the || operator to provide default values if the data is not available
@@ -85,7 +124,9 @@ const TourEdit = () => {
     // console.log(e.target.files);
     // setFile(URL.createObjectURL(e.target.files[0]));
     const imagePath = `/tour-images/${e.target.files[0].name}`
+    
     formData.photo = imagePath
+    console.log(formData.photo)
   }
 
   const displayInfo = () => {
@@ -93,6 +134,7 @@ const TourEdit = () => {
   }
 
   const handleClick = async e => {
+    
     e.preventDefault();
 
     try {
@@ -115,6 +157,7 @@ const TourEdit = () => {
         alert(err.message);
         console.log(err.message)
     }
+    displayInfo()
   }
 
   return (
@@ -123,27 +166,27 @@ const TourEdit = () => {
       <form className="newTourForm">
         <div className="newTourItem">
           <label>City</label>
-          <input type="text" placeholder="Enter City" defaultValue={formData.city} onChange={(e) => handleInputChange(e, 'city')}/>
+          <input type="text" name="city" placeholder="Enter City" value={formData.city} onChange={handleChange}/>
         </div>
         <div className="newTourItem">
           <label>Title</label>
-          <input type="text" placeholder="Enter Title" defaultValue={formData.title} onChange={(e) => handleInputChange(e, 'title')}/>
+          <input type="text" name="title" placeholder="Enter Title" value={formData.title} onChange={handleChange}/>
         </div>
         <div className="newTourItem">
           <label>Address</label>
-          <input type="email" placeholder="Enter Address" defaultValue={formData.address} onChange={(e) => handleInputChange(e, 'address')}/>
+          <input type="email" name="address" placeholder="Enter Address" value={formData.address} onChange={handleChange}/>
         </div>
         <div className="newTourItem">
           <label>Distance</label>
-          <input type="text" placeholder="Enter Distance" defaultValue={formData.distance} onChange={(e) => handleInputChange(e, 'distance')}/>
+          <input type="text" name="distance" placeholder="Enter Distance" value={formData.distance} onChange={handleChange}/>
         </div>
         <div className="newTourItem">
           <label>Maximum Number of People</label>
-          <input type="text" placeholder="Enter Number" defaultValue={formData.maxGroupSize} onChange={(e) => handleInputChange(e, 'maxGroupSize')}/>
+          <input type="text" name="maxGroupSize" placeholder="Enter Number" value={formData.maxGroupSize} onChange={handleChange}/>
         </div>
         <div className="newTourItem">
           <label>Price</label>
-          <input type="text" placeholder="Enter Price" defaultValue={formData.price} onChange={(e) => handleInputChange(e, 'price')}/>
+          <input type="text" name="price" placeholder="Enter Price" value={formData.price} onChange={handleChange}/>
         </div>
         {/* <div className="newUserItem">
           <label>Gender</label>
@@ -159,17 +202,21 @@ const TourEdit = () => {
 
         <div className="newTourItem">
           <label>Start Date</label>
-          <input type="date" defaultValue={formData.startDate} onChange={(e) => handleInputChange(e, 'startDate')}/>
+          <input type="date" name="startDate" value={formData.startDate} onChange={handleChange}/>
         </div>
         <div className="newTourItem">
           <label>End Date</label>
-          <input type="date" defaultValue={formData.endDate} onChange={(e) => handleInputChange(e, 'endDate')}/>
+          <input type="date" name="endDate" value={formData.endDate} onChange={handleChange}/>
         </div>
         <div className="newTourItem">
           <label>Featured</label>
-          <select className="newTourSelect">
-            <option value="yes" selected={formData.featured === true ? true : false} onChange={(e) => handleInputChange(e, 'featured')}>Yes</option>
-            <option value="no" selected={formData.featured === false ? true : false} onChange={(e) => handleInputChange(e, 'featured')}>No</option>
+          {/* <select className="newTourSelect" name="featured">
+            <option value="yes" selected={formData.featured === true ? true : false} onChange={handleChange}>Yes</option>
+            <option value="no" selected={formData.featured === false ? true : false} onChange={handleChange}>No</option>
+          </select> */}
+          <select className="newTourSelect" name="featured" value={formData.featured} onChange={handleChange}>
+              <option value="yes" selected={formData.featured === true ? true : false}>Yes</option>
+              <option value="no" selected={formData.featured === false ? true : false}>No</option>
           </select>
         </div>
 
@@ -189,8 +236,14 @@ const TourEdit = () => {
         <ReactQuill className='description_input_zone' 
                     theme='snow' 
                     value={formData.desc} 
+                    defaultValue=''
+                    // name='desc'
                     // onChange={setDescription}
                     // onChange={(content, delta, source, value) => handleQuillChange(value.getText().trim(), 'desc')}
+                    // onChange={(e) => handleInputChange(e, 'desc')}
+                    // onChange={handleQuillChangeDesc}
+                    // onChange={handleDesc}
+                    // onChange={(e) => setFormData({...formData, desc: e.target.value})}
                     placeholder="Enter Description"/>
       </div>
 
@@ -199,14 +252,19 @@ const TourEdit = () => {
         <ReactQuill className='description_input_zone' 
                     theme='snow' 
                     value={formData.itinerary} 
+                    defaultValue=''
+                    // name='itinerary'
                     // onChange={setItinerary}
                     // onChange={(content, delta, source, value) => handleQuillChange(value.getText().trim(), 'itinerary')}
+                    // onChange={(e) => handleInputChange(e, 'itinerary')}
+                    // onChange={handleItinerary}
+                    // onChange={(e) => setFormData({...formData, itinerary: e.target.value})}
+                    // onChange={handleQuillEditItinerary}
                     placeholder="Enter Itinerary"/>
       </div>
-
       <div className='btn_zone'>
         
-        <button className="newTourButton" onClick={displayInfo}>Update</button>
+        <button className="newTourButton" onClick={handleClick}>Update</button>
       </div>
      
     </div>

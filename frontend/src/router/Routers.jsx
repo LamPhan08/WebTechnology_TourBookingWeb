@@ -56,9 +56,9 @@ const Routers = () => {
             <Route path='/tours/payment/receipt/:id' element={<SubmitReceipt/>} />
             <Route path='/about' element={<About/>}/> 
             <Route path='/thank-you' element={<ThankYou/>}/> 
-            <Route path='/mybookings' element={<MyBookings/>}/>
+            <Route path='/myBookings/:id' element={<MyBookings/>}/>
             <Route path='/myprofile' element={<MyProfile/>}/>
-            <Route path='/mybookings/:id' element={<MyBookingDetails/>}/>
+            <Route path='/myBooking/:id' element={<MyBookingDetails/>}/>
             <Route path='/tours/search' element={<SearchResultList/>} />
             <Route path='/dashboard/customers/customerlist' element={<CustomerList/>}/>
             <Route path='/dashboard/customers/customerdetails/:id' element={<CustomerDetails/>}/>

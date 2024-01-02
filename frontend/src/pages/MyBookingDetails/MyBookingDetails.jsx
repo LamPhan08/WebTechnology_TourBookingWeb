@@ -5,12 +5,16 @@ import bookingData from '../../assets/data/bookings'
 import { useParams } from 'react-router-dom';
 import { BsCheck } from 'react-icons/bs'
 import { MdError } from 'react-icons/md'
+import useFetch from '../../hooks/useFetch';
+import { BASE_URL } from '../../utils/config';
 
 const MyBookingDetails = () => {
     // Lấy thông tin từ bookingData bằng cách dùng useParams
   const { id } = useParams();
-  const booking = bookingData.find(_booking => _booking.id === id)
-  const { tourname, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking
+  // const booking = bookingData.find(_booking => _booking.id === id)
+  const { data: booking } = useFetch(`${BASE_URL}/booking/${id}`);
+  console.log(booking)
+  const { tourName, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking
   //
 
  //Upload receipt
@@ -39,7 +43,7 @@ const MyBookingDetails = () => {
 
               <div className="viewBookingDetails">
                 <div className="tourNameContainer">
-                  <h4 className="tourNameTitle">{tourname}</h4>
+                  <h4 className="tourNameTitle">{tourName}</h4>
                 </div>
 
                 <div className='divideLine'></div>
@@ -77,7 +81,7 @@ const MyBookingDetails = () => {
                         </Col>
 
                         <Col lg='7'>
-                          <div className='displayedTourName'>{tourname}</div>
+                          <div className='displayedTourName'>{tourName}</div>
                         </Col>
                       </Row>
 

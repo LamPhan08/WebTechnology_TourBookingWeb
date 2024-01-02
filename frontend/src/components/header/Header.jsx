@@ -53,7 +53,7 @@ const Header = () => {
 
     const navigateBookings = () => {
         setOpenMenu(!openMenu)
-        navigate('/mybookings')
+        navigate(`/myBookings/${user._id}`)
     }
 
     const navigateDashboard = () => {

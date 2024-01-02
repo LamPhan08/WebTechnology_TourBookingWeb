@@ -4,7 +4,7 @@ import { MdDeleteOutline } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
 import { GrView } from 'react-icons/gr';
 import './tourlist.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import tourData from '../../../assets/data/tours'
 import useFetch from '../../../hooks/useFetch.js'
 import { BASE_URL } from "../../../utils/config.js";
@@ -37,6 +37,7 @@ const TourList = () => {
   // const [data, setData] = useState(tourData)
   const [data1, setData] = useState([])
   const {data: tours} = useFetch(`${BASE_URL}/tours`);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (tours) {
@@ -46,8 +47,29 @@ const TourList = () => {
     }
   }, [tours]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     // setData(data.filter((item) => item.id !== id))
+      try {
+        const res = await fetch(`${BASE_URL}/tours/${id}`, {
+            method: 'delete',
+            headers: {
+                'content-type': 'application/json',
+                // You may need to include additional headers such as authentication tokens
+            },
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+            alert(result.message);
+            // Additional logic after successful deletion
+            // navigate('/dashboard/tours/tourlist');
+        } else {
+            alert(result.error); // or handle the error in an appropriate way
+        }
+    } catch (err) {
+        alert(err.message);
+    }
   }
 
   const columns = [
