@@ -28,6 +28,7 @@ const TourEdit = () => {
   //   endDate,
   //   itinerary,
   // } = tour;
+  const [file, setFile] = useState('')
 
   const [formData, setFormData] = useState({
     title: '',
@@ -120,13 +121,42 @@ const TourEdit = () => {
     return <div>Loading...</div>;
   }
 
+  
+
+  const updateImage = async (files) => {
+    const imageData = new FormData()
+    imageData.append('file', files[0])
+    imageData.append('upload_preset', 'travel-booking-system')
+    imageData.append('cloud_name', 'doancloud')
+
+    // idea but has bugs
+    // const res = await fetch(`https://res.cloudinary.com/doancloud/image/upload/v${version}/${public_id}.${format}`, {
+    //     method: 'put',
+    //     body: imageData
+    // })
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/doancloud/image/upload', {
+        method: 'post',
+        body: imageData
+    })
+
+    const data = await res.json()
+    
+    formData.photo = data.secure_url
+    setFile(formData.photo)
+    console.log(formData.photo)
+    
+    return data
+  }
+
   function handleUpload(e) {
     // console.log(e.target.files);
     // setFile(URL.createObjectURL(e.target.files[0]));
-    const imagePath = `/tour-images/${e.target.files[0].name}`
+    // const imagePath = `/tour-images/${e.target.files[0].name}`
     
-    formData.photo = imagePath
-    console.log(formData.photo)
+    // formData.photo = imagePath
+    // console.log(formData.photo)
+    updateImage(e.target.files)
   }
 
   const displayInfo = () => {
@@ -228,7 +258,7 @@ const TourEdit = () => {
       </form>
 
       <div>
-        <img className='tour__img' src={formData.photo} alt="" />
+        <img className='tour__img' src={file} alt="" />
       </div>
 
       <div>

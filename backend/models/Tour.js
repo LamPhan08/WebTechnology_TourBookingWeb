@@ -23,6 +23,18 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // photoId: {
+    //   type: String,
+    //   required: true,
+    // },
+    // format: {
+    //   type: String,
+    //   required: true,
+    // },
+    // version: {
+    //   type: String,
+    //   required: true,
+    // },
     desc: {
       type: String,
       required: true,

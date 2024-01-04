@@ -5,6 +5,9 @@ import 'react-quill/dist/quill.snow.css';
 // import landscape from '../../assets/images/landscape.png'
 import {BASE_URL} from '../../../utils/config';
 import { useNavigate } from 'react-router-dom';
+import uploadImageToCloudinary from '../../../utils/uploadCloudinary';
+
+import axios from 'axios'
 
 const TourAdd = () => {
   const [title, setTitle] = useState('');
@@ -20,17 +23,39 @@ const TourAdd = () => {
   const [endDate, setEndDate] = useState('');
   const [itinerary, setItinerary] = useState('');
   
-  const [file, setFile] = useState();
+  // const [file, setFile] = useState();
+  const uploadImage = async (files) => {
+    const formData = new FormData()
+    formData.append('file', files[0])
+    formData.append('upload_preset', 'travel-booking-system')
+    formData.append('cloud_name', 'doancloud')
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/doancloud/image/upload', {
+        method: 'post',
+        body: formData
+    })
+
+    const data = await res.json()
+    // console.log(data)
+    setPhoto(data.secure_url)
+    return data
+  }
   function handleUpload(e) {
         // console.log(e.target.files);
         // setFile(URL.createObjectURL(e.target.files[0]));
         // setPhoto(URL.createObjectURL(e.target.files[0]))
-        const imagePath = `/tour-images/${e.target.files[0].name}`
+        // const imagePath = `/tour-images/${e.target.files[0].name}`
         // photo.value = imagePath;
-        setPhoto(imagePath)
-        console.log(photo);
-        
+        // setPhoto(e.target.files)
+        // console.log(photo);
+        uploadImage(e.target.files)
   }
+  // const handleUpload = async e => {
+  //   // const file = e.target.files[0]
+  //   // const data = await uploadImageToCloudinary(file);
+  //   // console.log(data)
+  //   // setPhoto(data.url)
+  // }
 
   const navigate = useNavigate();
 
@@ -65,7 +90,7 @@ const TourAdd = () => {
         const result = await res.json();
         console.log(result);
 
-        if(!res.ok) {
+        if(res.ok) {
             alert(result.message);
             navigate('/dashboard/tours/tourlist');
         }

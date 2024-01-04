@@ -71,12 +71,33 @@ const SubmitReceipt = () => {
     //Upload hình
     const [file, setFile] = useState()
 
+    const uploadImage = async (files) => {
+        const formData = new FormData()
+        formData.append('file', files[0])
+        formData.append('upload_preset', 'travel-booking-system')
+        formData.append('cloud_name', 'doancloud')
+    
+        const res = await fetch('https://api.cloudinary.com/v1_1/doancloud/image/upload', {
+            method: 'post',
+            body: formData
+        })
+    
+        const data = await res.json()
+        // setPhoto(data.secure_url)
+        // console.log(photo)
+        location.state.receiptImage = data.secure_url
+        setFile(location.state.receiptImage)
+        console.log(location.state.receiptImage)
+        return data
+      }
+
     const handleUpload = (e) => {
         // console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
-        const imagePath = `/receipt-images/${e.target.files[0].name}`
-        console.log(imagePath)
-        location.state.receiptImage = imagePath
+        // setFile(URL.createObjectURL(e.target.files[0]));
+        // const imagePath = `/receipt-images/${e.target.files[0].name}`
+        // console.log(imagePath)
+        // location.state.receiptImage = imagePath
+        uploadImage(e.target.files)
     }
 
     return (

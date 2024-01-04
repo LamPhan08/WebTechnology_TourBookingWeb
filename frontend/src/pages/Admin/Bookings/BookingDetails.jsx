@@ -44,7 +44,8 @@ const BookingDetails = () => {
     
 
     const handleViewImage = () => {
-        setViewImage(!viewImage)
+        // setViewImage(!viewImage)
+        
     }
 
     return (
