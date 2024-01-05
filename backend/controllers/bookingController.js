@@ -82,3 +82,22 @@ export const updatedBooking = async (req, res) => {
         });
     }
 };
+
+// delete booking
+export const deleteBooking = async (req, res) => {
+    const id = req.params.id;
+    
+    try {
+        await Booking.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: 'Deleted Successfully!',
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Failed to delete!'
+        });
+    }
+};

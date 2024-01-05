@@ -26,15 +26,36 @@ const BookingList = () => {
     }
   }, [users]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     // setData(data.filter((item) => item.id !== id))
+    try {
+      const res = await fetch(`${BASE_URL}/booking/${id}`, {
+          method: 'delete',
+          headers: {
+              'content-type': 'application/json',
+              // You may need to include additional headers such as authentication tokens
+          },
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+          alert(result.message);
+          // Additional logic after successful deletion
+          // navigate('/dashboard/tours/tourlist');
+      } else {
+          alert(result.error); // or handle the error in an appropriate way
+      }
+    } catch (err) {
+        alert(err.message);
+    }
   }
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
 
     {
-      field: 'tourname',
+      field: 'tourName',
       headerName: 'Tour',
       width: 250,
       renderCell: (params) => {
