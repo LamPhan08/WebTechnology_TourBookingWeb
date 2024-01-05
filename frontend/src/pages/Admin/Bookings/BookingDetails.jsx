@@ -13,9 +13,10 @@ const BookingDetails = () => {
     // const booking = bookingData.find(_booking => _booking.id === id)
     // const { tourname, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking
     const { data: booking } = useFetch(`${BASE_URL}/booking/${id}`);
+    const { tourName, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking;
 
     const [status, setStatus] = useState({
-        paymentStatus: booking.paymentStatus
+        paymentStatus: ''
     })
 
     // const handleInputChange = (e, fieldName) => {
@@ -25,7 +26,7 @@ const BookingDetails = () => {
     const [viewImage, setViewImage] = useState(false)
 
     // const customer = customerData.find(customer => customer.id === id);
-    console.log(booking);
+    // console.log(booking);
 
     if (!booking) {
         // Handle the case when data is still loading or customer is not found
@@ -38,9 +39,31 @@ const BookingDetails = () => {
     // }
     
 
-    const { tourName, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking;
+    
     //
 
+    const handleUpdateStatus = async e => {
+        e.preventDefault();
+
+        try {
+            const res = await fetch(`${BASE_URL}/booking/${id}`, {
+                method: 'put',
+                headers: {
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(
+                    status
+                )
+            });
+            const result = await res.json();
+
+            if(res.ok) {
+                alert(result.message);
+            }
+        } catch (err) {
+            alert(err.message);
+        }
+    };
     
 
     const handleViewImage = () => {
@@ -190,14 +213,20 @@ const BookingDetails = () => {
 
                                     <div className='divideLine'></div>
 
-                                    <select className="paymentStatusSelect mb-4" value={status.paymentStatus}>
-                                        <option value="pending" selected={paymentStatus === 'Pending' ? true : false}>Pending</option>
-                                        <option value="approved" selected={paymentStatus === 'Approved' ? true : false}>Approved</option>
-                                        <option value="invalid" selected={paymentStatus === 'Invalid Receipt' ? true : false}>Invalid Receipt</option>
+                                    <select className="paymentStatusSelect mb-4" value={status.paymentStatus}
+                                        onChange={(e) => {
+                                            // setStatus(text)
+                                            setStatus({ ...status, paymentStatus: e.target.value })
+                                            console.log(status.paymentStatus)
+                                        }}
+                                    >
+                                        <option value="Pending" selected={paymentStatus === 'Pending' ? true : false}>Pending</option>
+                                        <option value="Approved" selected={paymentStatus === 'Approved' ? true : false}>Approved</option>
+                                        <option value="Invalid" selected={paymentStatus === 'Invalid Receipt' ? true : false}>Invalid Receipt</option>
                                     </select>
 
                                     <div className='mb-3'>
-                                        <button className='updateStatusBtn' onClick={() => {}}>
+                                        <button className='updateStatusBtn' onClick={handleUpdateStatus}>
                                             Update Status
                                         </button>
                                     </div>
