@@ -15,10 +15,12 @@ const MyBookingDetails = () => {
   const { data: booking } = useFetch(`${BASE_URL}/booking/${id}`);
   console.log(booking)
   const { tourName, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking
+
+  console.log('receiptImage:', receiptImage)
   //
 
  //Upload receipt
- const [file, setFile] = useState(receiptImage)
+ const [file, setFile] = useState('')
 
  const uploadImage = async (files) => {
   const formData = new FormData()
@@ -225,7 +227,7 @@ const MyBookingDetails = () => {
                       <div className='divideLine'></div>
 
                       <div className='receiptZone mb-3'>
-                        <img src={file} alt="Receipt"  className={file === '' ? null : 'haveImage'} onClick={file === '' ? null : handleViewImage}/>
+                        <img src={file === '' ? receiptImage : file} alt="Receipt"  className={file === '' ? null : 'haveImage'} onClick={file === '' ? null : handleViewImage}/>
                       </div>
 
                       <div className={(paymentStatus === 'Pending' || paymentStatus === 'Invalid Receipt') ? 'visibleBtn' : 'invisibleBtn'}>

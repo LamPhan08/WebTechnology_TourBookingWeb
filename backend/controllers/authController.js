@@ -19,12 +19,17 @@ export const register = async (req, res) => {
             });
         */
         
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            photo: req.body.photo
-        });
+            const newUser = new User({
+                        username: req.body.username,
+                        fullName: '',
+                        email: req.body.email,
+                        password: req.body.password,
+                        phoneNumber: '',
+                        address: '',
+                        dateOfBirth: '',
+                        photo: req.body.photo,
+                        role: 'user'
+                    });
 
         await newUser.save();
 
@@ -36,7 +41,7 @@ export const register = async (req, res) => {
     } catch (err) {
         res.status(500).json({
             success: false,
-            message: "Failed to create! Try again!"
+            message: "Failed to create! Try again!" + err.message
         });
     }
 };

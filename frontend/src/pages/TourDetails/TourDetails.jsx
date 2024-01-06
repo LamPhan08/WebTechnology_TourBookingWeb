@@ -40,6 +40,8 @@ const TourDetails = () => {
     const { totalRating, avgRating } = calculateAvgRating(reviews)
     const options = { day: "numeric", month: "long", year: "numeric" };
 
+    console.log('avgRating', avgRating)
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [tour]);

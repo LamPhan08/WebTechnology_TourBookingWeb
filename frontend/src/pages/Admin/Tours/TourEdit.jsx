@@ -190,6 +190,7 @@ const TourEdit = () => {
     displayInfo()
   }
 
+
   return (
     <div className="newTour">
       <h1 className="newTourTitle">Edit Tour</h1>
@@ -258,7 +259,7 @@ const TourEdit = () => {
       </form>
 
       <div>
-        <img className='tour__img' src={file} alt="" />
+        <img className='tour__img' src={file === '' ? tour.photo : file} alt="" />
       </div>
 
       <div>

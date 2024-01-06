@@ -15,8 +15,10 @@ const BookingDetails = () => {
     const { data: booking } = useFetch(`${BASE_URL}/booking/${id}`);
     const { tourName, total, startDate, endDate, bookingDate, fullName, email, phone, address, guestSize, paymentStatus, receiptImage } = booking;
 
+    console.log('receiptImage', receiptImage)
+
     const [status, setStatus] = useState({
-        paymentStatus: ''
+        paymentStatus: paymentStatus
     })
 
     // const handleInputChange = (e, fieldName) => {

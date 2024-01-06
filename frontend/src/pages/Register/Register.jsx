@@ -10,7 +10,7 @@ import {BASE_URL} from './../../utils/config.js';
 
 const Register = () => {
     const [credentials, setCredentials] = useState ({
-        userName: undefined,
+        username: undefined,
         email: undefined,
         password: undefined,
     });
@@ -24,7 +24,7 @@ const Register = () => {
 
     const handleClick = async e => {
         e.preventDefault();
-
+            console.log(credentials)
         try {
             const res = await fetch(`${BASE_URL}/auth/register`, {
                 method: 'post',

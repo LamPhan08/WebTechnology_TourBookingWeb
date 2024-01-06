@@ -6,6 +6,22 @@ import './dashboardtourdetails.css'
 import useFetch from '../../../hooks/useFetch'
 import { BASE_URL } from '../../../utils/config'
 
+const scheduleDetails = [
+  {
+    day: 'Ngày 1',
+    activities: ['Đến điểm xuất phát', 'Check-in khách sạn'],
+  },
+  {
+    day: 'Ngày 2',
+    activities: ['Thăm địa điểm A', 'Dùng trưa tại nhà hàng địa phương', 'Tham quan điểm B'],
+  },
+  {
+    day: 'Ngày 3',
+    activities: ['Khám phá địa điểm B', 'Mua sắm tại thị trấn', 'Dùng tối tại nhà hàng'],
+  },
+  // Thêm các ngày và hoạt động khác nếu cần
+];
+
 const DashboardTourDetails = () => {
   const { id } = useParams();
 
@@ -89,9 +105,19 @@ const DashboardTourDetails = () => {
           Tour Itinerary
         </h2>
         {itinerary}<br/>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis error ut, sit nam dicta soluta, id doloribus doloremque consectetur sint hic tenetur aspernatur iure aliquid, ratione recusandae sequi omnis facilis.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni rem cumque voluptate! Libero consequatur natus cumque adipisci velit, voluptas, blanditiis est maxime ut rerum maiores, distinctio et aperiam dolor nihil?4
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur blanditiis doloremque commodi assumenda placeat alias perspiciatis exercitationem quos suscipit quae nihil, expedita quaerat aperiam provident quo architecto corrupti doloribus cupiditate.
+        
+        <ul>
+                                            {scheduleDetails.map((dayDetail, index) => (
+                                                <li key={index}>
+                                                    <span className="day">{dayDetail.day}:</span>
+                                                    <ul>
+                                                        {dayDetail.activities.map((activity, activityIndex) => (
+                                                            <li key={activityIndex}>{activity}</li>
+                                                        ))}
+                                                    </ul>
+                                                </li>
+                                            ))}
+                                        </ul>
       </div>
     </div>
   )
