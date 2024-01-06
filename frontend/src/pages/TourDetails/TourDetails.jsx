@@ -11,15 +11,31 @@ import useFetch from './../../hooks/useFetch'
 import { BASE_URL } from './../../utils/config';
 import { AuthContext } from "../../context/AuthContext";
 
+const scheduleDetails = [
+    {
+      day: 'Ngày 1',
+      activities: ['Đến điểm xuất phát', 'Check-in khách sạn'],
+    },
+    {
+      day: 'Ngày 2',
+      activities: ['Thăm địa điểm A', 'Dùng trưa tại nhà hàng địa phương', 'Tham quan điểm B'],
+    },
+    {
+      day: 'Ngày 3',
+      activities: ['Khám phá địa điểm B', 'Mua sắm tại thị trấn', 'Dùng tối tại nhà hàng'],
+    },
+    // Thêm các ngày và hoạt động khác nếu cần
+  ];
+
 const TourDetails = () => {
     const { id } = useParams();
     const reviewMsgRef = useRef('');
     const [tourRating, setTourRating] = useState(null);
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     // fetch data from database
     // const tour = tourData.find(tour => tour.id === id)
-    const {data:tour, loading, error} = useFetch(`${BASE_URL}/tours/${id}`);
+    const { data: tour, loading, error } = useFetch(`${BASE_URL}/tours/${id}`);
     const { photo, title, desc, price, address, reviews, city, distance, maxGroupSize } = tour
     const { totalRating, avgRating } = calculateAvgRating(reviews)
     const options = { day: "numeric", month: "long", year: "numeric" };
@@ -36,11 +52,11 @@ const TourDetails = () => {
 
     const submitHandler = async e => {
         e.preventDefault()
-        
+
         const reviewText = reviewMsgRef.current.value;
 
         try {
-            if(!user || user === undefined || user === null) {
+            if (!user || user === undefined || user === null) {
                 alert('Please sign in to continue!');
             }
 
@@ -60,7 +76,7 @@ const TourDetails = () => {
             });
 
             const result = await res.json();
-            if(!res.ok) {
+            if (!res.ok) {
                 return alert(result.message);
             }
             // else {
@@ -74,7 +90,7 @@ const TourDetails = () => {
     }
 
     return (
-        <div style={{paddingTop: 50}}>
+        <div style={{ paddingTop: 50 }}>
             <section id="tour_details_section">
                 <Container>
                     {
@@ -131,6 +147,21 @@ const TourDetails = () => {
                                         <h5>Description</h5>
 
                                         <p>{desc}</p>
+
+                                        <h5>Tour itinerary</h5>
+
+                                        <ul>
+                                            {scheduleDetails.map((dayDetail, index) => (
+                                                <li key={index}>
+                                                    <span className="day">{dayDetail.day}:</span>
+                                                    <ul>
+                                                        {dayDetail.activities.map((activity, activityIndex) => (
+                                                            <li key={activityIndex}>{activity}</li>
+                                                        ))}
+                                                    </ul>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
 
                                     {/* Tour reviews */}
